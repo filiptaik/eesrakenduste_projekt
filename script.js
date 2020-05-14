@@ -7,6 +7,15 @@ maxGap = 500;
 gap = randGap();
 var myObstacles = [];
 
+window.onload = startGame;
+/*
+restartButton = document.getElementById("#restart");
+restartButton.addEventListener("onclick",function(){
+  location.reload();
+  return false;
+});
+*/
+
 
 var gamescreen = {
   canvas: document.createElement("canvas"),
@@ -20,7 +29,14 @@ var gamescreen = {
     this.interval = setInterval(this.updateGameScreen, 5);
     window.addEventListener("keydown", jump);
   },
+
   updateGameScreen: function () {
+    for(i = 0; i < myObstacles.length; i++){
+      if(player.crash(myObstacles[i])){
+        gamescreen.stop();
+        return;
+      }
+    }
     gamescreen.clear();
     if (everyinterval(gap)){
     myObstacles.push(new obstacle());
@@ -28,31 +44,23 @@ var gamescreen = {
     gamescreen.frame = 0;
     }
     for (i = 0; i < myObstacles.length; i++) {
-        myObstacles[i].x -= 1;
+        myObstacles[i].x -= 2;
         myObstacles[i].draw();
     }
     player.newPos();
     player.update();
     gamescreen.frame += 1;
     },
+
   clear: function () {
     gamescreen.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
   },
-  stop: function () {
 
+  stop: function () {
+    clearInterval(this.interval);
   }
 };
 
-function obstacle() {
-    this.height = Math.floor(minHeight + Math.random() * (maxHeight - minHeight + 1));
-    this.width = Math.floor(minWidth + Math.random() * (maxWidth - minWidth + 1));
-    this.x = 1200;
-    this.y = gamescreen.height - this.height;
-    this.draw = function () {
-      gamescreen.context.fillStyle = "#FF0000";
-      gamescreen.context.fillRect(this.x, this.y, this.width, this.height);
-    };
-}
 
 var player = {
     x:20,
@@ -69,7 +77,27 @@ var player = {
         if(this.speedY == 2 && this.y == 470){
             this.speedY = 0;
         }
+    },
+    crash:function(obs){
+      if(this.x + 30 > obs.x && this.x < obs.x + obs.width && this.y > obs.y){
+        return true;
+      } else {
+        return false;
+      }
+
     }
+
+}
+
+function obstacle() {
+  this.height = Math.floor(minHeight + Math.random() * (maxHeight - minHeight + 1));
+  this.width = Math.floor(minWidth + Math.random() * (maxWidth - minWidth + 1));
+  this.x = 1200;
+  this.y = gamescreen.height - this.height;
+  this.draw = function () {
+    gamescreen.context.fillStyle = "#FF0000";
+    gamescreen.context.fillRect(this.x, this.y, this.width, this.height);
+  };
 }
 
 function startGame() {
@@ -89,5 +117,6 @@ function startGame() {
       return Math.floor(minGap + Math.random() * (maxGap - minGap + 1));
   }
   
+
   
   
