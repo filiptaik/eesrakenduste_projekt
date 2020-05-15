@@ -1,4 +1,4 @@
-minHeight = 40;
+minHeight = 60;
 maxHeight = 150;
 minWidth = 20;
 maxWidth = 40;
@@ -27,7 +27,13 @@ var gamescreen = {
     this.context = this.canvas.getContext("2d");
     this.frame = 0;
     this.interval = setInterval(this.updateGameScreen, 5);
-    window.addEventListener("keydown", jump);
+    window.addEventListener("keydown", function(e){
+      switch(e.which){
+        case 38:
+          jump();
+          break;
+      }
+    });    
   },
 
   updateGameScreen: function () {
