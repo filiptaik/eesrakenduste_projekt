@@ -8,14 +8,6 @@ gap = randGap();
 var myObstacles = [];
 
 window.onload = startGame;
-/*
-restartButton = document.getElementById("#restart");
-restartButton.addEventListener("onclick",function(){
-  location.reload();
-  return false;
-});
-*/
-
 
 var gamescreen = {
   canvas: document.createElement("canvas"),
