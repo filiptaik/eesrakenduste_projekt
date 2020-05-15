@@ -6,11 +6,24 @@ minGap = 200;
 maxGap = 500;
 gap = randGap();
 var myObstacles = [];
+var loop;
+
+
 
 window.onload = startGame;
 
 var gamescreen = {
   canvas: document.createElement("canvas"),
+
+  /* up:false,
+  keyListener:function(event){
+    var key_state = (event.type == "keydown")?true:false;
+    switch(event.keyCode){
+      case 38:
+        jump();
+        break;
+    }
+  }, */
   start: function () {
     this.height = 500;
     this.canvas.height = 500;
@@ -61,9 +74,10 @@ var gamescreen = {
 
 
 var player = {
+    jumping:true,
     x:20,
     y:470,
-    speedY: 0,
+    y_vel:0,
     update:function(){
         gamescreen.context.fillRect(this.x, this.y, 30, 30);
     },
@@ -86,6 +100,18 @@ var player = {
     }
 
 }
+
+loop = function(){
+  if (gamescreen.up && player.jumping == false){
+    player.y_vel -= 20;
+    player.jumping = true;
+  }
+
+  player.y_vel += 1.5;
+
+}
+
+window.requestAnimationFrame(loop);
 
 function obstacle() {
   this.height = Math.floor(minHeight + Math.random() * (maxHeight - minHeight + 1));
