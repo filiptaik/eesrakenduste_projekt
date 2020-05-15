@@ -1,7 +1,7 @@
-minHeight = 20;
-maxHeight = 100;
-minWidth = 10;
-maxWidth = 20;
+minHeight = 40;
+maxHeight = 150;
+minWidth = 20;
+maxWidth = 40;
 minGap = 200;
 maxGap = 500;
 gap = randGap();
