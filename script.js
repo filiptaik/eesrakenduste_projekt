@@ -12,9 +12,9 @@ window.onload = startGame;
 var gamescreen = {
   canvas: document.createElement("canvas"),
 
-  
   start: function () {
     this.height = 500;
+    this.done = false;
     this.canvas.height = 500;
     this.canvas.width = 1200;
     document.body.insertBefore(this.canvas, document.body.childNodes[0]);
@@ -24,23 +24,24 @@ var gamescreen = {
     
     this.level2 = setTimeout(this.levelTwo, 30000);
     this.level3 = setTimeout(this.levelThree, 60000);
-  
-    //this.finish = setTimeout(this.gameOver, 1000)
+    this.finish = setTimeout(this.gameOver, 90000);
     
     window.addEventListener("keydown", function(e){
         var key_state = (event.type == "keydown")?true:false;
         switch(e.which){
+
           case 38:
             if(player.y == 470){
-              //jump();
               player.jumping = key_state;
             }
             break;
+
           case 39:
             if(player.y != 470){
               obstacle.move = key_state;
             }
             break;
+
           }
     });    
   },
@@ -65,14 +66,23 @@ var gamescreen = {
         myObstacles[i].x -= 2.3;
         myObstacles[i].draw();
         if(obstacle.second == true){
-          //minGap = 50;
           myObstacles[i].x -= 2.5;
           myObstacles[i].draw();
         } else if(obstacle.third == true){
           myObstacles[i].x -= 3;
           myObstacles[i].draw();
+        } else if(this.done == true ){ // mäng läbi, kuubik kihutab minema
+            if(myObstacles[i].x <= 0){
+              myObstacles[i].x -= 0;
+              gamescreen.clear();
+              player.x_vel += 27;
+              break;
+            }
+          }
         }
-      }
+        
+      player.x += player.x_vel;
+      player.x_vel *= 0.9;
 
       if(player.jumping == true){
         player.speedY = -3;
@@ -119,21 +129,20 @@ var gamescreen = {
   },
   
   gameOver: function () {
-    for(i = 0; i < myObstacles.length; i++){
-      myObstacles = []
-    }
+    this.done = true;
   }
 };
 
 
 var player = {
-    x:20,
-    y:470,
+    x: 20,
+    y: 470,
     speedY: 0,
+    x_vel: 0,
     y_vel: 0,
     jumping: false,
     update:function(){
-        gamescreen.context.fillRect(this.x, this.y, 30, 30);
+      gamescreen.context.fillRect(this.x, this.y, 30, 30);
     },
     newPos:function(){ 
         // siis kui hyppega tippu jõuab, saab kõrgust muuta -- 280 -- 
