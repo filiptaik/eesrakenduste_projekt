@@ -21,11 +21,11 @@ var gamescreen = {
     this.context = this.canvas.getContext("2d");
     this.frame = 0;
     this.interval = setInterval(this.updateGameScreen, 5);
-    /*
+    
     this.level2 = setTimeout(this.levelTwo, 30000);
     this.level3 = setTimeout(this.levelThree, 60000);
-    */
-    this.finish = setTimeout(this.gameOver, 1000)
+  
+    //this.finish = setTimeout(this.gameOver, 1000)
     
     window.addEventListener("keydown", function(e){
         var key_state = (event.type == "keydown")?true:false;
@@ -80,7 +80,7 @@ var gamescreen = {
       }
 
       if(obstacle.move == true){
-        var breakDash = setTimeout(stopDash, 300);
+        breakDash = setTimeout(stopDash, 300);
         for(i = 0; i < myObstacles.length; i++){
           if(player.x != 470){
             myObstacles[i].x -= 5;
@@ -157,7 +157,6 @@ var player = {
 
 }
 
-
 function obstacle() {
   this.height = Math.floor(minHeight + Math.random() * (maxHeight - minHeight + 1));
   this.width = Math.floor(minWidth + Math.random() * (maxWidth - minWidth + 1));
@@ -192,10 +191,8 @@ function randGap(){
 
 function dash(){
   for (i = 0; i < 50; i++) {
-  
     myObstacles[i].x -= myObstacles[i].x_vel;
     myObstacles[i].x_vel = 50;
-    
   }
 }
 
