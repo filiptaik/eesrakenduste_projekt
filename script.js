@@ -8,6 +8,9 @@ gap = randGap();
 var myObstacles = [];
 var seconds = 0;
 var overAllSeconds = 0;
+var xd;
+
+scoreBoard = [];
 
 window.onload = startGame;
 
@@ -176,6 +179,7 @@ var player = {
     },
     crash:function(obs){
       if(this.x + 30 > obs.x && this.x < obs.x + obs.width && this.y > obs.y){
+        gameOverScreen();
         return true;
       } else {
         return false;
@@ -201,11 +205,7 @@ function obstacle() {
   };
 }
 
-// loeb sisse mängija punktisumma (sekundid) ja nime ----- POOLIK ------
-function gameScore(points, playerName){
-  this.points = points;
-  this.playerName = playerName;
-}
+
 
 // tekitab canvase ja alustab mängu
 function startGame() {
@@ -256,8 +256,8 @@ function countDown(){
       secondCounter.innerText = "Seconds until next level: " + nextLevel ;
     }
   } else {
-      secondCounter.innerText = "";
-      return;
+    secondCounter.innerText = "";
+    return;
   }
 }
 
@@ -268,6 +268,77 @@ function countPlayTime(){
   } else {
     overAllSeconds = overAllSeconds;
     console.log(overAllSeconds);
-    clearInterval(gamescreen.playTime);  
+    clearInterval(gamescreen.playTime); 
+
   }
 }
+
+// tekitab game over ekraani, nime textarea ja save nupu. vaja on cssiga asukoht paika panna
+function gameOverScreen(){
+
+  setTimeout(function(){
+
+    var ctx = gamescreen.context;
+    gamescreen.context.font = "75px Georgia";
+    ctx.fillStyle = "#B2B2B2";
+    ctx.fillText("Kaotasid :(", 420, 150);
+
+
+    gamescreen.context.font = "50px Georgia";
+    ctx.fillStyle = "#B2B2B2";
+    ctx.fillText("Su skoor oli " + overAllSeconds, 430, 250);
+
+    secondCounter.innerText = "";
+
+    inputDiv =  document.createElement("div");
+    inputDiv.setAttribute("id", "inputDiv");
+
+    screen = document.createElement("input");
+    screen.setAttribute("id", "playerName");
+    screen.placeholder = "Kirjuta oma nimi";
+
+    
+    saveButton = document.createElement("button");
+    saveButton.setAttribute("id", "saveButton");
+    saveButton.innerText = "Salvesta";
+
+    restartButton = document.createElement("button");
+    restartButton.setAttribute("id", "restart");
+    restartButton.addEventListener("click", function(){
+      window.location.reload()
+    });
+    restartButton.innerText = "Mängi uuesti";
+    //inputDiv.appendChild(label);
+    inputDiv.appendChild(screen);
+    inputDiv.appendChild(saveButton);
+    inputDiv.appendChild(restartButton);
+
+    document.body.appendChild(inputDiv);
+  }, 500);
+
+  setTimeout(() => {
+    gamescreen.context.fillStyle = "#ca3e47";
+    gamescreen.context.fillRect(350, 50, 500, 400);
+
+  }, 499);
+
+}
+
+// ei tööta mdea miks
+xd = document.getElementById("#saveButton");
+xd.addEventListener("click", function(){
+  console.log("save")
+  var name = document.getElementById("playerName").value;
+  //gamescore(overAllSeconds, name);
+  scoreBoard.push(gameScore(overAllSeconds, name));
+  for(i = 0; i < scoreBoard.length; i++){
+    console.log(scoreBoard[i]);
+  }
+});
+
+// loeb sisse mängija punktisumma (sekundid) ja nime ----- POOLIK ------
+function gameScore(points, playerName){
+  this.points = points;
+  this.playerName = playerName;
+}
+
