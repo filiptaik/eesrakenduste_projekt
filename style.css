@@ -1,4 +1,31 @@
 canvas{
-    border: 5px;
-    background-color: gray;
+    background-color: #525252;
+    position: absolute;
+    right: 20%;
+    top: 10%;
+    border: solid;
+    border-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+body{
+    background-color: #313131;
+    
+}
+
+
+
+div{
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
+
+
+body.light{
+    background-color: #fafafa;
 }

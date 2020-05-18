@@ -17,7 +17,7 @@ var gamescreen = {
     this.done = false;
     this.canvas.height = 500;
     this.canvas.width = 1200;
-    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+    document.body.insertBefore(this.canvas, document.body.childNodes[2]);
     this.context = this.canvas.getContext("2d");
     this.frame = 0;
     this.interval = setInterval(this.updateGameScreen, 5);
@@ -144,6 +144,8 @@ var player = {
     update:function(){
       gamescreen.context.fillRect(this.x, this.y, 30, 30);
     },
+    
+
     newPos:function(){ 
         // siis kui hyppega tippu jõuab, saab kõrgust muuta -- 280 -- 
         if(this.y < 250){
@@ -176,7 +178,7 @@ function obstacle() {
   this.second = false;
   this.third = false;
   this.draw = function () {
-    gamescreen.context.fillStyle = "#FF0000";
+    gamescreen.context.fillStyle = "#ca3e47";
     gamescreen.context.fillRect(this.x, this.y, this.width, this.height);
   };
 }
@@ -210,6 +212,3 @@ function stopDash(){
 }
 
 
-
-  
-  
