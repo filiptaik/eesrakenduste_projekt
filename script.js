@@ -6,9 +6,13 @@ minGap = 200;
 maxGap = 500;
 gap = randGap();
 var myObstacles = [];
+var seconds = 0;
+var overAllSeconds = 0;
 
 window.onload = startGame;
 
+
+// mänguekraan 
 var gamescreen = {
   canvas: document.createElement("canvas"),
 
@@ -17,7 +21,14 @@ var gamescreen = {
     this.done = false;
     this.canvas.height = 500;
     this.canvas.width = 1200;
-    document.body.insertBefore(this.canvas, document.body.childNodes[2]);
+    document.body.appendChild(this.canvas);
+
+    secondCounter = document.createElement("P");
+    secondCounter.setAttribute("id", "counter");
+    this.test = setInterval(countDown, 1000);
+    document.body.appendChild(secondCounter);
+
+
     this.context = this.canvas.getContext("2d");
     this.frame = 0;
     this.interval = setInterval(this.updateGameScreen, 5);
@@ -25,7 +36,10 @@ var gamescreen = {
     this.level2 = setTimeout(this.levelTwo, 30000);
     this.level3 = setTimeout(this.levelThree, 60000);
     this.finish = setTimeout(this.gameOver, 90000);
-    
+
+    this.playTime = setInterval(countPlayTime, 1000);
+
+    // üles hüppamine ja dashimine
     window.addEventListener("keydown", function(e){
         var key_state = (event.type == "keydown")?true:false;
         switch(e.which){
@@ -46,9 +60,11 @@ var gamescreen = {
     });    
   },
 
+  // game loop, kõik selle funktsiooni sees käivitub iga viie millisekundi tagant
   updateGameScreen: function () {
     for(i = 0; i < myObstacles.length; i++){
       if(player.crash(myObstacles[i])){
+        player.isCrashed = true;
         gamescreen.stop();
         return;
       }
@@ -66,7 +82,7 @@ var gamescreen = {
         myObstacles[i].x -= 2.3;
         myObstacles[i].draw();
         if(obstacle.second == true){
-          myObstacles[i].x -= 2.5;
+          myObstacles[i].x -= 2.5; //2.5
           myObstacles[i].draw();
         } else if(obstacle.third == true){
           myObstacles[i].x -= 3;
@@ -133,7 +149,7 @@ var gamescreen = {
   }
 };
 
-
+// mängukuubiku parameetrid ja liikumine
 var player = {
     x: 20,
     y: 470,
@@ -141,6 +157,7 @@ var player = {
     x_vel: 0,
     y_vel: 0,
     jumping: false,
+    isCrashed: false,
     update:function(){
       gamescreen.context.fillRect(this.x, this.y, 30, 30);
     },
@@ -168,6 +185,7 @@ var player = {
 
 }
 
+// takistuste parameetrid ja joonistamine
 function obstacle() {
   this.height = Math.floor(minHeight + Math.random() * (maxHeight - minHeight + 1));
   this.width = Math.floor(minWidth + Math.random() * (maxWidth - minWidth + 1));
@@ -183,10 +201,18 @@ function obstacle() {
   };
 }
 
+// loeb sisse mängija punktisumma (sekundid) ja nime ----- POOLIK ------
+function gameScore(points, playerName){
+  this.points = points;
+  this.playerName = playerName;
+}
+
+// tekitab canvase ja alustab mängu
 function startGame() {
     gamescreen.start();
   }
   
+// liigutab mängijat üles
 function jump(){
     player.speedY = -3;
 }
@@ -196,10 +222,12 @@ function everyinterval(n){
     return false;
 }
 
+// tekitab suvalise vahe takistuste vahel
 function randGap(){
     return Math.floor(minGap + Math.random() * (maxGap - minGap + 1));
 }
 
+// dashimine, liigutab takistusi lähemale
 function dash(){
   for (i = 0; i < 50; i++) {
     myObstacles[i].x -= myObstacles[i].x_vel;
@@ -207,8 +235,39 @@ function dash(){
   }
 }
 
+// peatab dashimise
 function stopDash(){
   obstacle.move = false;
 }
 
+// loeb sekundeid kuni järgmise levenini (30st allapoole)
+function countDown(){
+  if(player.isCrashed == false){
+    seconds += 1;
+    toNextLevel = 31
+    nextLevel = toNextLevel - seconds;
+    if(nextLevel != 0){
+      secondCounter.innerText = "Seconds until next level: " + nextLevel ;
+    } else {
+      toNextLevel = 31
+      seconds = 0;
+      seconds += 1;
+      nextLevel = toNextLevel - seconds;
+      secondCounter.innerText = "Seconds until next level: " + nextLevel ;
+    }
+  } else {
+      secondCounter.innerText = "";
+      return;
+  }
+}
 
+// loeb mängu algusest kuni lõpuni sekundeid
+function countPlayTime(){
+  if(player.isCrashed == false || gamescreen.done == false){
+    overAllSeconds += 1;
+  } else {
+    overAllSeconds = overAllSeconds;
+    console.log(overAllSeconds);
+    clearInterval(gamescreen.playTime);  
+  }
+}

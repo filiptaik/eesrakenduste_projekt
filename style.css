@@ -29,3 +29,10 @@ div{
 body.light{
     background-color: #fafafa;
 }
+
+#counter{
+    font-size: larger;
+    color: white;
+    text-align: center;
+}
+
