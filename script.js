@@ -6,6 +6,7 @@ minGap = 200;
 maxGap = 500;
 gap = randGap();
 var myObstacles = [];
+var myTopObstacles = [];
 
 window.onload = startGame;
 
@@ -80,7 +81,7 @@ var gamescreen = {
             }
           }
         }
-        
+
       player.x += player.x_vel;
       player.x_vel *= 0.9;
 
@@ -165,6 +166,12 @@ var player = {
     }
 
 }
+
+/* Äkki takistused mis tulevad ülevalt alla?
+function topObstacle(){
+  this.height = Math.floor(minHeight + Math.random() * (maxHeight - minHeight + 1));
+}
+*/
 
 function obstacle() {
   this.height = Math.floor(minHeight + Math.random() * (maxHeight - minHeight + 1));
