@@ -85,7 +85,7 @@ var gamescreen = {
         myObstacles[i].x -= 2.3;
         myObstacles[i].draw();
         if(obstacle.second == true){
-          myObstacles[i].x -= 2.5; //2.5
+          myObstacles[i].x -= 2.5; 
           myObstacles[i].draw();
         } else if(obstacle.third == true){
           myObstacles[i].x -= 3;
@@ -273,7 +273,7 @@ function countPlayTime(){
   }
 }
 
-// tekitab game over ekraani, nime textarea ja save nupu. vaja on cssiga asukoht paika panna
+// tekitab game over ekraani, nime textarea ja save nupu
 function gameOverScreen(){
 
   setTimeout(function(){
