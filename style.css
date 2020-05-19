@@ -1,5 +1,4 @@
 canvas{
-    background-color: #525252;
     position: absolute;
     right: 20%;
     top: 10%;
@@ -11,9 +10,10 @@ canvas{
     
 }
 
-body{
-    background-color: #313131;
-    
+button{
+    padding: 10px;
+    font-weight: bold;
+    border: none;
 }
 
 
@@ -25,14 +25,8 @@ div{
 }
 
 
-
-body.light{
-    background-color: #fafafa;
-}
-
 #counter{
     font-size: larger;
-    color: white;
     text-align: center;
 }
 

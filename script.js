@@ -176,6 +176,7 @@ var player = {
         if(this.speedY == 3 && this.y == 470 ){
             this.speedY = 0;
         }
+        gamescreen.context.fillStyle = "white";
     },
     crash:function(obs){
       if(this.x + 30 > obs.x && this.x < obs.x + obs.width && this.y > obs.y){
