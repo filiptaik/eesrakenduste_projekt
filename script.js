@@ -123,6 +123,7 @@ var gamescreen = {
 
     player.newPos();
     player.update();
+    player.playerImg();
     gamescreen.frame += 1;
   },
 
@@ -164,6 +165,14 @@ var player = {
     update:function(){
       gamescreen.context.fillRect(this.x, this.y, 30, 30);
     },
+
+   /*  playerImg:function(){
+      var img = getImage("1.png");
+      var pat = context.createPattern(img);
+      //context.rect(this.x, this.y, 30, 30);
+      gamescreen.context.fillStyle(pat);
+      gamescreen.context.fill();
+    }, */
     
 
     newPos:function(){ 
