@@ -1,3 +1,8 @@
+body{
+  font-family: 'VT323', monospace;
+}
+
+
 canvas {
   position: absolute;
   right: 20%;
@@ -13,6 +18,7 @@ button {
   padding: 10px;
   font-weight: bold;
   border: none;
+  font-family: 'VT323', monospace;
 }
 
 div {
@@ -24,6 +30,7 @@ div {
 #counter {
   font-size: larger;
   text-align: center;
+  font-family: 'VT323', monospace;
 }
 
 #inputDiv {
@@ -36,6 +43,7 @@ div {
   margin-left: 840px;
   display: flex;
   flex-direction: column;
+  
 }
 
 #playerName,
