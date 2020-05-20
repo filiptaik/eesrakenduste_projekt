@@ -124,7 +124,7 @@ var gamescreen = {
 
     player.newPos();
     player.update();
-    player.playerImg();
+    //player.playerImg();
     gamescreen.frame += 1;
   },
 
@@ -166,20 +166,8 @@ var player = {
     update:function(){
       base_image = new Image();
       base_image.src = 'soonik.gif';
-      //base_image.onload = function(){
       gamescreen.context.drawImage(base_image, this.x, this.y - 20, 50, 50);
-      //}
-      //gamescreen.context.fillRect( this.x, this.y, 30, 30);
     },
-
-   /*  playerImg:function(){
-      var img = getImage("1.png");
-      var pat = context.createPattern(img);
-      //context.rect(this.x, this.y, 30, 30);
-      gamescreen.context.fillStyle(pat);
-      gamescreen.context.fill();
-    }, */
-    
 
     newPos:function(){ 
         // siis kui hyppega tippu jõuab, saab kõrgust muuta -- 280 -- 
@@ -216,8 +204,13 @@ function obstacle() {
   this.second = false;
   this.third = false;
   this.draw = function () {
+    base_image = new Image();
+    base_image.src = 'corona.png';
+    gamescreen.context.drawImage(base_image, this.x, this.y +20, this.width + 10, this.height);
+    /*
     gamescreen.context.fillStyle = "#ca3e47";
     gamescreen.context.fillRect(this.x, this.y, this.width, this.height);
+    */
   };
 }
 
