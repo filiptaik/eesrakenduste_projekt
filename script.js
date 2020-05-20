@@ -65,6 +65,7 @@ var gamescreen = {
 
   // game loop, kõik selle funktsiooni sees käivitub iga viie millisekundi tagant
   updateGameScreen: function () {
+
     for(i = 0; i < myObstacles.length; i++){
       if(player.crash(myObstacles[i])){
         player.isCrashed = true;
@@ -162,7 +163,12 @@ var player = {
     jumping: false,
     isCrashed: false,
     update:function(){
-      gamescreen.context.fillRect(this.x, this.y, 30, 30);
+      base_image = new Image();
+      base_image.src = 'soonik.gif';
+      //base_image.onload = function(){
+      gamescreen.context.drawImage(base_image, this.x, this.y - 20, 50, 50);
+      //}
+      //gamescreen.context.fillRect( this.x, this.y, 30, 30);
     },
     
 
