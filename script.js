@@ -164,9 +164,14 @@ var player = {
     jumping: false,
     isCrashed: false,
     update:function(){
-      base_image = new Image();
-      base_image.src = 'soonik.gif';
-      gamescreen.context.drawImage(base_image, this.x, this.y - 20, 50, 50);
+      base_image.src = '1.png';
+      dash_image.src = '2.png'
+      //base_image.onload = function(){
+      if(player.isDashing = true){
+        gamescreen.context.drawImage(dash_image, this.x, this.y - 20, 50, 50);
+      } else {
+        gamescreen.context.drawImage(base_image, this.x, this.y - 20, 50, 50);
+      }
     },
 
     newPos:function(){ 
@@ -335,19 +340,21 @@ function gameOverScreen(){
 
 // ei tööta mdea miks
 xd = document.getElementById("#saveButton");
-xd.addEventListener("click", function(){
-  console.log("save")
-  var name = document.getElementById("playerName").value;
-  //gamescore(overAllSeconds, name);
-  scoreBoard.push(gameScore(overAllSeconds, name));
-  for(i = 0; i < scoreBoard.length; i++){
-    console.log(scoreBoard[i]);
+if (xd){
+  addEventListener("click", saveUser());
+  function saveUser(){
+    console.log("save")
+    var name = document.getElementById("playerName").value;
+    //gamescore(overAllSeconds, name);
+    scoreBoard.push(gameScore(overAllSeconds, name));
+    for(i = 0; i < scoreBoard.length; i++){
+      console.log(scoreBoard[i]);
+    }
   }
-});
+}
 
 // loeb sisse mängija punktisumma (sekundid) ja nime ----- POOLIK ------
 function gameScore(points, playerName){
   this.points = points;
   this.playerName = playerName;
-}
-
+}  
