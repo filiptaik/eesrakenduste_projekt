@@ -351,19 +351,21 @@ function gameOverScreen(){
 
 // ei tööta mdea miks
 xd = document.getElementById("#saveButton");
-xd.addEventListener("click", function(){
-  console.log("save")
-  var name = document.getElementById("playerName").value;
-  //gamescore(overAllSeconds, name);
-  scoreBoard.push(gameScore(overAllSeconds, name));
-  for(i = 0; i < scoreBoard.length; i++){
-    console.log(scoreBoard[i]);
+if (xd){
+  addEventListener("click", saveUser());
+  function saveUser(){
+    console.log("save")
+    var name = document.getElementById("playerName").value;
+    //gamescore(overAllSeconds, name);
+    scoreBoard.push(gameScore(overAllSeconds, name));
+    for(i = 0; i < scoreBoard.length; i++){
+      console.log(scoreBoard[i]);
+    }
   }
-});
+}
 
 // loeb sisse mängija punktisumma (sekundid) ja nime ----- POOLIK ------
 function gameScore(points, playerName){
   this.points = points;
   this.playerName = playerName;
-}
-
+}  
