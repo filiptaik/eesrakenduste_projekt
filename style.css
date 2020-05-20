@@ -50,6 +50,8 @@ div {
 #saveButton,
 #restart {
   margin-bottom: 5px;
-  border: 2px solid gray;
-  background-color: #b2b2b2;
+  /*border: 2px solid gray;*/
+  background-color: #404040;
+  font-size: xx-large;
+
 }

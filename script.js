@@ -318,7 +318,7 @@ function gameOverScreen(){
 
     inputDiv =  document.createElement("div");
     inputDiv.setAttribute("id", "inputDiv");
-
+    /*
     screen = document.createElement("input");
     screen.setAttribute("id", "playerName");
     screen.placeholder = "Enter your name";
@@ -327,23 +327,24 @@ function gameOverScreen(){
     saveButton = document.createElement("button");
     saveButton.setAttribute("id", "saveButton");
     saveButton.innerText = "Save";
-
+    */
     restartButton = document.createElement("button");
     restartButton.setAttribute("id", "restart");
     restartButton.addEventListener("click", function(){
       window.location.reload()
     });
-    restartButton.innerText = "Restart";
-    //inputDiv.appendChild(label);
+    restartButton.innerText = "Play again";
+    /*
     inputDiv.appendChild(screen);
     inputDiv.appendChild(saveButton);
+    */
     inputDiv.appendChild(restartButton);
-
+    
     document.body.appendChild(inputDiv);
   }, 500);
 
   setTimeout(() => {
-    gamescreen.context.fillStyle = "#ca3e47";
+    gamescreen.context.fillStyle = "#404040";
     gamescreen.context.fillRect(350, 50, 500, 400);
 
   }, 499);
