@@ -50,12 +50,14 @@ var gamescreen = {
           case 38:
             if(player.y == 470){
               player.jumping = key_state;
+              player.air = true;
             }
             break;
 
           case 39:
             if(player.y != 470){
               obstacle.move = key_state;
+              //player.air = false;
             }
             break;
 
@@ -162,11 +164,23 @@ var player = {
     x_vel: 0,
     y_vel: 0,
     jumping: false,
+    air:false,
     isCrashed: false,
     update:function(){
       base_image = new Image();
       base_image.src = 'soonik.gif';
-      gamescreen.context.drawImage(base_image, this.x, this.y - 20, 50, 50);
+
+      base_image_jump = new Image();
+      base_image_jump.src = 'corona.png';
+
+      base_image_dash = new Image();
+      base_image_dash.src = 'soonik.gif';
+      if(this.air == false){
+        gamescreen.context.drawImage(base_image, this.x, this.y - 20, 50, 50);
+      } else/* if(player.jumping == true)*/{
+        console.log("air")
+        gamescreen.context.drawImage(base_image_jump, this.x, this.y - 20, 50, 50);
+      }
     },
 
     newPos:function(){ 
@@ -178,6 +192,8 @@ var player = {
         // siis kui jälle maad puudutab
         if(this.speedY == 3 && this.y == 470 ){
             this.speedY = 0;
+            player.air = false;
+
         }
         gamescreen.context.fillStyle = "white";
     },
