@@ -305,14 +305,14 @@ function gameOverScreen(){
   setTimeout(function(){
 
     var ctx = gamescreen.context;
-    gamescreen.context.font = "75px Georgia";
+    gamescreen.context.font = "75px VT323";
     ctx.fillStyle = "#B2B2B2";
-    ctx.fillText("Kaotasid :(", 420, 150);
+    ctx.fillText("You lost :c", 420, 150);
 
 
-    gamescreen.context.font = "50px Georgia";
+    gamescreen.context.font = "50px VT323";
     ctx.fillStyle = "#B2B2B2";
-    ctx.fillText("Su skoor oli " + overAllSeconds, 430, 250);
+    ctx.fillText("Your score was " + overAllSeconds, 430, 250);
 
     secondCounter.innerText = "";
 
@@ -321,19 +321,19 @@ function gameOverScreen(){
 
     screen = document.createElement("input");
     screen.setAttribute("id", "playerName");
-    screen.placeholder = "Kirjuta oma nimi";
+    screen.placeholder = "Enter your name";
 
     
     saveButton = document.createElement("button");
     saveButton.setAttribute("id", "saveButton");
-    saveButton.innerText = "Salvesta";
+    saveButton.innerText = "Save";
 
     restartButton = document.createElement("button");
     restartButton.setAttribute("id", "restart");
     restartButton.addEventListener("click", function(){
       window.location.reload()
     });
-    restartButton.innerText = "Mängi uuesti";
+    restartButton.innerText = "Restart";
     //inputDiv.appendChild(label);
     inputDiv.appendChild(screen);
     inputDiv.appendChild(saveButton);
@@ -351,22 +351,21 @@ function gameOverScreen(){
 }
 
 // ei tööta mdea miks
-xd = document.getElementById("#saveButton");
-if (xd){
-  addEventListener("click", saveUser());
-  function saveUser(){
-    console.log("save")
-    var name = document.getElementById("playerName").value;
-    //gamescore(overAllSeconds, name);
-    scoreBoard.push(gameScore(overAllSeconds, name));
-    for(i = 0; i < scoreBoard.length; i++){
-      console.log(scoreBoard[i]);
-    }
-  }
-}
+/* xd = document.getElementById("#saveButton");
+xd.addEventListener("click", saveUser());
+function saveUser(){
+  console.log("save")
+  var name = document.getElementById("playerName").value;
+  //gamescore(overAllSeconds, name);
+  scoreBoard.push(gameScore(overAllSeconds, name));
+  for(i = 0; i < scoreBoard.length; i++){
+    console.log(scoreBoard[i]);
+    localStorage.setItem("PlayerName: ", playerName);
+  }}
 
 // loeb sisse mängija punktisumma (sekundid) ja nime ----- POOLIK ------
 function gameScore(points, playerName){
   this.points = points;
   this.playerName = playerName;
-}  
+} */
+
