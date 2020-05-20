@@ -6,7 +6,7 @@ Programm tekitab piirsuuruseid arvestades jooksvalt erinevate suurustega takistu
 
 Kasutasime järgmisest videost mõned read koodi, et dashimisel tekkiv takistuste x positsiooni muutus tuleks sujuvam
 
-[!Õpetus](https://www.youtube.com/watch?v=8uIt9a2XBrw&t=153s "Õpetus")
+[Õpetus](https://www.youtube.com/watch?v=8uIt9a2XBrw&t=153s "Õpetus")
 
 Tööjaotus: 
 Filip Taik - mängufüüsika, levelid, loendurid\
