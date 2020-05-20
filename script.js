@@ -9,7 +9,6 @@ var myObstacles = [];
 var seconds = 0;
 var overAllSeconds = 0;
 var xd;
-
 scoreBoard = [];
 
 window.onload = startGame;
@@ -18,7 +17,6 @@ window.onload = startGame;
 // mänguekraan 
 var gamescreen = {
   canvas: document.createElement("canvas"),
-
   start: function () {
     this.height = 500;
     this.done = false;
@@ -57,7 +55,7 @@ var gamescreen = {
           case 39:
             if(player.y != 470){
               obstacle.move = key_state;
-              //player.air = false;
+
             }
             break;
 
@@ -165,21 +163,24 @@ var player = {
     y_vel: 0,
     jumping: false,
     air:false,
+    dash:false,
     isCrashed: false,
     update:function(){
       base_image = new Image();
-      base_image.src = 'soonik.gif';
+      base_image.src = '1.png';
 
       base_image_jump = new Image();
-      base_image_jump.src = 'corona.png';
+      base_image_jump.src = 'corona_jump.png';
 
       base_image_dash = new Image();
-      base_image_dash.src = 'soonik.gif';
-      if(this.air == false){
+      base_image_dash.src = 'corona_dash.gif';
+      if(this.air == false ){
         gamescreen.context.drawImage(base_image, this.x, this.y - 20, 50, 50);
-      } else/* if(player.jumping == true)*/{
+      } else if(this.air == true){
         console.log("air")
-        gamescreen.context.drawImage(base_image_jump, this.x, this.y - 20, 50, 50);
+        gamescreen.context.drawImage(base_image_jump, this.x, this.y - 20, 30, 30);
+      } else if(this.dash == true){
+        gamescreen.context.drawImage(base_image_dash, this.x, this.y - 20, 30, 30);
       }
     },
 
@@ -187,13 +188,13 @@ var player = {
         // siis kui hyppega tippu jõuab, saab kõrgust muuta -- 280 -- 
         if(this.y < 250){
             this.speedY += 3;
+            //player.air = false;
         }
         this.y = this.y + this.speedY;
         // siis kui jälle maad puudutab
         if(this.speedY == 3 && this.y == 470 ){
             this.speedY = 0;
             player.air = false;
-
         }
         gamescreen.context.fillStyle = "white";
     },
